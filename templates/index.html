@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+<title>Welcome to zuBu land</title>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 intro" style="margin-top: 20%">
+        <h4>y0,</h4>
+        <p>This is my Little Homepage of Calm.</p> 
+        <p>No cookies will track you here. You can disable AdBlock.</p>
+        <p>No shady tracking scripts. No flash required.</p>
+        <p>Here you can find a not-so-comprehensive <a href="{{ url_for('blog') }}">diary</a> of my interests, browse my <a href="https://github.com/zuBux">code</a> or peek at my public <a href="#">research</a>.</p>
+        <br>
+        <p>Cheers,</p>
+        <p><a href="{{ url_for('about') }}"<small>zuBu</small></p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

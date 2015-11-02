@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+<title>About zuBu</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="nav" align="center" style="margin-top: 15%"><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('blog') }}">Blog</a> | <b>About</b>
+        </div>
+      <div class="col-md-6 intro">
+        <h4>Hi,</h4>
+        <p>I'm Paris, security researcher, free software enthusiast and privacy concerned individual.</p> 
+        <p>In 2013 I co-founded <a href="https://wwww.projectzero.gr">Project Zero</a> (Google's <a href="#">Project Zero</a> made its appearance around 2014) where I currently work as an IT Security Engineer. On my spare computer time I hunt for bugs in open source projects, build security related tools and try to figure out whether a tech apocalypse is inevitable.</p>
+        <p>I always welcome interesting discussions so feel free to <a href="mailto:zubu@zubu.re">contact</a> me. However, I prefer not to discuss things by postcard, so here's my <a href="#">public key</a>.</p>
+        <a href="https://www.twitter.com/pzubu"><img src="{{ url_for('static', filename='images/twitter.png') }}"></a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

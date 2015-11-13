@@ -1,17 +1,17 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
-from database import Base
 from datetime import datetime
+from app import db
 
-class Post(Base):
+class Post(db.Model):
   __tablename__ = 'post'
-  id = Column(Integer, primary_key=True)
-  title = Column(String(120))
-  summary = Column(Text)
-  body = Column(Text)
-  pub_date = Column(DateTime)
+  id = db.Column(Integer, primary_key=True)
+  title = db.Column(String(120))
+  summary = db.Column(Text)
+  body = db.Column(Text)
+  pub_date = db.Column(DateTime)
 
-  category_id = Column(Integer, ForeignKey('category.id'))
+  category_id = db.Column(Integer, ForeignKey('category.id'))
   category = relationship('Category',
         backref=backref('posts', lazy='dynamic'))
 
@@ -26,10 +26,10 @@ class Post(Base):
   def __repr__(self):
     return '<Post %r>' % self.title
 
-class Category(Base):
+class Category(db.Model):
   __tablename__ = 'category'
-  id = Column(Integer, primary_key=True)
-  name = Column(String(80))
+  id = db.Column(Integer, primary_key=True)
+  name = db.Column(String(80))
   description = Column(Text)
 
   def __init__(self, name, descr):

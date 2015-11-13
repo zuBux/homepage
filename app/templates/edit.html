@@ -9,19 +9,17 @@
 
   <div class="nav" align="center" style="margin-top: 15%"><a href="{{ url_for('index') }}">Home</a> | <b>Blog</b> | <a href="{{ url_for('about') }}">About</a>
   </div>
-<div class="col-md-8">
+<div class="col-md-10">
 <section>
-  <form action="{{ form_action }}" method="{{ method | d("POST") }}">
+  <form class="well" action="{{ form_action }}" method="{{ method | d("POST") }}">
     <div class="row">
-      <label>Title</label>
-      {{ form.title }}
+      {{ form.title(class_="form-group",placeholder="Title") }}
     </div>
     <div class="row">
-      <label>Body</label>
-      {{ form.body }}
+      {{ form.body(class_="form-group", placeholder="Body", cols="120", rows="30") }}
     </div>
     <div class="btn-group">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Publish</button>
     </div>
 </div>
   </form>

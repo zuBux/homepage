@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from datetime import datetime
-from database import db_session
+#from database import db_session
 from models import Post, Category
 from forms import PostForm, LoginForm
-from app import app
+from app import app, db
 import hashlib
 
 app.config.from_envvar('FLASK_SETTINGS')
@@ -43,8 +43,8 @@ def add_post():
     title = request.form['title']
     body = request.form['body']
     new_post = Post(title, body, cat)
-    db_session.add(new_post)
-    db_session.commit()
+    db.add(new_post)
+    db.commit()
   return render_template("edit.html", action="Add", form=form)
 
 @app.route('/blog/post/<post_id>/edit', methods=['GET', 'POST'])
@@ -56,8 +56,8 @@ def edit_post(post_id):
   if request.method == 'POST':
     post.title = request.form['title']
     post.body = request.form['body']
-    db_session.add(post)
-    db_session.commit()
+    db.add(post)
+    db.commit()
   return render_template("edit.html", action="Add", form=form)
 
 @app.route('/about')

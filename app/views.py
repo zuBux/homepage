@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from datetime import datetime
 from database import db_session
-from models import Post
+from models import Post, Category
+from forms import PostForm, LoginForm
 from app import app
 import hashlib
 
-#app = Flask(__name__)
 app.config.from_envvar('FLASK_SETTINGS')
 
 
@@ -33,6 +33,33 @@ def view_post(post_id):
   return render_template('post.html', post=post, posts=older)
 
 
+@app.route('/blog/post/add', methods=['GET', 'POST'])
+def add_post():
+  if session['logged_in'] is not True:
+    return render_template("unauthorized.html", dict={})
+  form = PostForm()
+  if request.method == 'POST':
+    cat = Category.query.get(1)
+    title = request.form['title']
+    body = request.form['body']
+    new_post = Post(title, body, cat)
+    db_session.add(new_post)
+    db_session.commit()
+  return render_template("edit.html", action="Add", form=form)
+
+@app.route('/blog/post/<post_id>/edit', methods=['GET', 'POST'])
+def edit_post(post_id):
+  if session['logged_in'] is not True:
+    return render_template("unauthorized.html", dict={})
+  post = Post.query.get(post_id)
+  form = PostForm(obj=post)
+  if request.method == 'POST':
+    post.title = request.form['title']
+    post.body = request.form['body']
+    db_session.add(post)
+    db_session.commit()
+  return render_template("edit.html", action="Add", form=form)
+
 @app.route('/about')
 def about():
   return render_template('about.html', nodict={})
@@ -41,7 +68,9 @@ def about():
 # No user model in DB since we require only one user.No plaintext pass though
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+  form = LoginForm()
   error = None
+
   if request.method == 'POST':
     hash_pass = hashlib.sha256(request.form['password']).hexdigest()
     print "got it"
@@ -53,4 +82,10 @@ def login():
         session['logged_in'] = True
         flash('You were logged in')
         return redirect(url_for('blog'))
-  return render_template('login.html', error=error)
+  return render_template('login.html', error=error, form=form)
+
+
+@app.route('/logout')
+def logout():
+  session['logged_in'] = False
+  return redirect(url_for('index'))

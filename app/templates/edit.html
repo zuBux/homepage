@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  <link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+  <title>{{ action }} Post</title>
+{% endblock %}
+
+{% block body %}
+
+  <div class="nav" align="center" style="margin-top: 15%"><a href="{{ url_for('index') }}">Home</a> | <b>Blog</b> | <a href="{{ url_for('about') }}">About</a>
+  </div>
+<div class="col-md-8">
+<section>
+  <form action="{{ form_action }}" method="{{ method | d("POST") }}">
+    <div class="row">
+      <label>Title</label>
+      {{ form.title }}
+    </div>
+    <div class="row">
+      <label>Body</label>
+      {{ form.body }}
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </div>
+</div>
+  </form>
+</section>
+
+{% endblock %}

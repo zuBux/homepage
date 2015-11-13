@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
+  <link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
   <title>zuBu | Blog</title>
 {% endblock %}
 
@@ -10,22 +11,24 @@
   </div>
   <div class="post">
     <h2>{{ first.title }}</h2>
-    <div class="pubdate">Posted on {{ first.pub_date.strftime('%Y-%m-%d') }}</div>
     <div class="post-body">
       {{ first.body }}
     <div>
+    <div class="pubdate"><small>Posted on {{ first.pub_date.strftime('%Y-%m-%d') }}</small></div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6 prevposts">
     <div class="panel panel-default">
       <div class="panel-heading">Older Posts</div>
         <table class="table">
          <tbody>
-          {% for post in posts %}
-          <tr>
-            <td>{{ post.pub_date.strftime('%Y-%m-%d') }}</td>
-            <td>{{ post.title }}</td>
-          </tr>
-          {% endfor %}
+          {% if posts %}
+            {% for post in posts %}
+            <tr>
+              <td>{{ post.pub_date.strftime('%Y-%m-%d') }}</td>
+              <td>{{ post.title }}</td>
+            </tr>
+            {% endfor %}
+          {% endif %}
         </tbody>
       </table>
     </div>

@@ -1,10 +1,14 @@
+from flask import Flask
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from config_local import *
 
+app = Flask(__name__)
+app.config.from_envvar('FLASK_SETTINGS')
 
-engine = create_engine('mysql+mysqldb://'+ MYSQL_USR + ':' + MYSQL_PASS + '@mariadb/' + DB_NAME)
+engine = create_engine('mysql+mysqldb://'+ app.config['MYSQL_USR'] + ':' \
+						+ app.config['MYSQL_PASS'] + '@'+ app.config['HOST']\
+						+'/' + app.config['DB_NAME'])
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from datetime import datetime
 #from database import db_session
-from models import Post, Category
+from models import Post
 from forms import PostForm, LoginForm
 from app import app, db
 import hashlib
@@ -39,13 +39,13 @@ def add_post():
     return render_template("unauthorized.html", dict={})
   form = PostForm()
   if request.method == 'POST':
-    cat = Category.query.get(1)
     title = request.form['title']
     body = request.form['body']
-    new_post = Post(title, body, cat)
-    db.add(new_post)
-    db.commit()
+    new_post = Post(title, body)
+    db.session.add(new_post)
+    db.session.commit()
   return render_template("edit.html", action="Add", form=form)
+
 
 @app.route('/blog/post/<post_id>/edit', methods=['GET', 'POST'])
 def edit_post(post_id):
@@ -56,9 +56,10 @@ def edit_post(post_id):
   if request.method == 'POST':
     post.title = request.form['title']
     post.body = request.form['body']
-    db.add(post)
-    db.commit()
+    db.session.add(post)
+    db.session.commit()
   return render_template("edit.html", action="Add", form=form)
+
 
 @app.route('/about')
 def about():

@@ -1,12 +1,9 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from datetime import datetime
-#from database import db_session
-from models import Post
+from models import Post, Category
 from forms import PostForm, LoginForm
 from app import app, db
 import hashlib
-
-app.config.from_envvar('FLASK_SETTINGS')
 
 
 @app.route('/')
@@ -16,10 +13,16 @@ def index():
 
 @app.route('/blog')
 def blog():
-  posts = Post.query.order_by(-Post.pub_date)
+  cat = Category.query.get(1)
+  posts = cat.posts.order_by(-Post.pub_date)
   first = posts.first()
   older = posts[1:]
   return render_template('blog.html', first=first, posts=older)
+
+
+@app.route('/research')
+def research():
+  return render_template('research.html', nodict={})
 
 
 @app.route('/blog/post/<post_id>')
@@ -41,7 +44,9 @@ def add_post():
   if request.method == 'POST':
     title = request.form['title']
     body = request.form['body']
-    new_post = Post(title, body)
+    cat_num = request.form['category']
+    cat = Category.query.get(cat_num)
+    new_post = Post(title, body, cat)
     db.session.add(new_post)
     db.session.commit()
   return render_template("edit.html", action="Add", form=form)

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +22,18 @@
 
   <body>
     <div class="container">
+      {% block menu %}
+        <div class="menu">
+        {% set navigation_bar = [('index', 'Home'),('blog','Blog'),('research','Research'),('about','About')] %}
+        {% set active_page = active_page|default('index') -%}
+          {% for id, caption in navigation_bar %}
+            <li {% if id == active_page %}class="active"{% endif %}>
+               <a href="{{ url_for(id) }}">{{ caption|e }}</a> {% if not loop.index == navigation_bar | length %} |{% endif %}
+            </li>
+          {% endfor %}
+        </div>
+      {% endblock %}
+
       {% block body %}
       {% endblock %}
     </div>

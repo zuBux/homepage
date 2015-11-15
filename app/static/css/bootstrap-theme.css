@@ -586,9 +586,25 @@ fieldset[disabled] .btn-danger.active {
 }
 /*# sourceMappingURL=bootstrap-theme.css.map */
 
-.nav {
+.menu li{
+
+  display: inline;
+
+}
+
+.active > a {
+  pointer-events: none;
+  cursor: default;
+  font-weight: bold;
+  color: black;
+}
+
+.menu {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
+  text-align: center; 
+  margin-top: 15%;
+  padding-bottom: 30px;
 }
 
 .intro {
@@ -603,6 +619,8 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .post-body{
+  text-align: justify;
+  text-justify: inter-word;
   font-family: Verdana, Geneva, sans-serif;
   font-size: medium; line-height: 20px;
   margin-top: 3%
@@ -622,3 +640,4 @@ fieldset[disabled] .btn-danger.active {
  font-style: italic;
  margin-top: 10px;
 }
+

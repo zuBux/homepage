@@ -7,12 +7,9 @@ from app.models import *
 from app import app, db
 
 
-#app = Flask(__name__)
 app.config.from_object('config_local')
 
-#db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 

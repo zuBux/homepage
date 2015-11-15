@@ -6,15 +6,18 @@
 <title>Welcome to zuBu land</title>
 {% endblock %}
 
+{% block menu %}
+{% endblock %}
+
 {% block body %}
   <div class="container">
     <div class="row">
       <div class="col-md-8 intro" style="margin-top: 20%">
         <h4>y0,</h4>
         <p>This is my Little Homepage of Calm.</p> 
-        <p>No cookies will track you here. You can disable AdBlock.</p>
-        <p>No shady tracking scripts. No flash required.</p>
-        <p>Here you can find a not-so-representative <a href="{{ url_for('blog') }}">sample</a> of my interests and parts of my InfoSec <a href="#">research</a>.</p>
+        <p>No cookies will track you here. No shady JS scripts.</p>
+        <p>Feel free to disable Adblock. No flash required.</p>
+        <p>You 're welcome to browse my <a href="{{ url_for('blog') }}">blog</a> and parts of my InfoSec <a href="{{ url_for('research') }}">research</a>.</p>
         <br>
         <p>Cheers,</p>
         <p><a href="{{ url_for('about') }}"<small>zuBu</small></p>

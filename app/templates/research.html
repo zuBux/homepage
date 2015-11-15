@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% set active_page = 'research' %}
+
+
+{% block title %}
+<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+<title>zuBu | Research</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+      <div class="col-md-8 intro">
+        <p>Until I decide to create a dedicated page for my research publications and interests, here is a list of external links:</p>
+        <h1>Advisories</h1>
+        <ul>
+          <li><a href="https://www.exploit-db.com/exploits/37533/">CVE-2015-5520</a> – Orchard Persistent XSS Vulnerability</li>
+          <li><a href="http://www.cvedetails.com/cve/CVE-2014-9639/">CVE-2014-9639</a> – Integer overflow in vorbis-tools</li>
+          <li><a href="http://www.cvedetails.com/cve/CVE-2014-9638">CVE-2014-9638</a> – Division by zero in vorbis-tools</li>
+          <li><a href="http://www.cvedetails.com/cve/CVE-2014-9330">CVE-2014-9330</a> – Libtiff integer overflow in bmp2tiff</li>
+          <li><a href="https://projectzero.gr/en/2014/11/zte-zxhn-h108l-authentication-bypass/">CVE-2014-8493</a> – ZTE ZXHN H108L Authentication Bypass (<a href="https://gist.github.com/zuBux/2dbc3a159adf694b1086">PoC</a>)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
